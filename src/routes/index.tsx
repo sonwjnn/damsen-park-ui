@@ -27,6 +27,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="/home" replace /> },
       { path: "home", lazy: () => import("./home") },
+      { path: "category", lazy: () => import("./category") },
     ],
   },
 ]);

@@ -1,11 +1,13 @@
 import { FaFacebookSquare } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaYoutube } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Logo } from "./logo";
 import { cn } from "../lib/utils";
+import { useCategoryModal } from "../store/use-category-modal";
 
 export const Sidebar = () => {
+  const navigate = useNavigate();
   const location = useLocation();
 
   const routes = [
@@ -36,11 +38,28 @@ export const Sidebar = () => {
     },
   ];
 
+  const isCategoryRoute = location.pathname === "/category";
+
+  const handleClick = () => {
+    if (isCategoryRoute) {
+      navigate("/home");
+    } else {
+      navigate("/category");
+    }
+  };
+
   return (
     <div className="bg-[#259E58] text-white h-screen w-64 flex flex-col p-4">
       <div className="px-8 mx-auto mb-10 pt-2">
-        <button className="bg-white size-16 rounded-full flex items-center justify-center">
-          <img src="/public/icons/xmark-large.png" />
+        <button
+          onClick={handleClick}
+          className="bg-white size-16 rounded-full flex items-center justify-center"
+        >
+          {isCategoryRoute ? (
+            <img src="/icons/xmark-large-close.png" />
+          ) : (
+            <img src="/icons/xmark-large.png" />
+          )}
         </button>
       </div>
       <div className="px-3">
